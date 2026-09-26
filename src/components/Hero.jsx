@@ -50,8 +50,8 @@ const Hero = ({ animState = 'idle', onNavigate }) => {
 
       {/* ── Left content ── */}
       <div className="hero-left">
-        <p className="hero-eyebrow">Full Stack Developer</p>
-        <h1 className="hero-title">Full Stack<br />Developer</h1>
+        <p className="hero-eyebrow">Software Developer</p>
+        <h1 className="hero-title">Software<br />Developer</h1>
         <p className="hero-desc">
           Result-oriented developer integrating AI<br />
           to build modern, high-quality SaaS & web apps.
