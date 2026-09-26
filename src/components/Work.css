@@ -1,0 +1,249 @@
+/* ═══════════════════════════════════════
+   WORK SECTION
+═══════════════════════════════════════ */
+.work-section {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #f9f7f5;
+}
+
+.work--gone {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Navbar ─── */
+.work-navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 48px;
+  z-index: 10;
+  background: #f9f7f5;
+}
+
+.work-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1.5px solid #2e2b28;
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1816;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, transform 0.2s;
+  font-family: inherit;
+}
+.work-back-btn:hover {
+  background: #1a1816;
+  color: #f9f7f5;
+  transform: translateX(-3px);
+}
+
+.work-nav-center {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.work-nav-count {
+  font-size: 0.72rem;
+  color: #aaa;
+  letter-spacing: 0.08em;
+}
+
+/* ─── Content ─── */
+.work-content {
+  flex: 1;
+  padding: clamp(40px, 6vh, 80px) clamp(40px, 8vw, 120px) 80px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.work-header {
+  margin-bottom: 48px;
+}
+.work-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.work-heading {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900;
+  color: #1a1816;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* ─── Grid ─── */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.work-card {
+  position: relative;
+  padding: 28px;
+  border: 1px solid #e8e5e0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  text-decoration: none;
+  display: block;
+}
+.work-card:hover {
+  border-color: #1a1816;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+}
+
+.work-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.work-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 0.12em;
+}
+.work-year {
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+.work-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a1816;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+.work-desc {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.work-tag {
+  padding: 3px 10px;
+  border: 1px solid #e0ddd8;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+}
+.work-card:hover .work-tag {
+  border-color: #1a1816;
+  color: #1a1816;
+}
+.work-arrow {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  font-size: 1rem;
+  color: #ccc;
+  transition: color 0.2s, transform 0.2s;
+}
+.work-card:hover .work-arrow {
+  color: #1a1816;
+  transform: translate(2px, -2px);
+}
+
+
+/* ═══════════════════════════════════════
+   STYLE ①  CLIP WIPE  (horizontal)
+   Content squeezes to a vertical center line → expands back
+   Like pages being pressed flat then unfolded
+═══════════════════════════════════════ */
+
+/* Navbar always just fades — consistent across all sections */
+@keyframes workNavExit  { from{opacity:1;transform:translate3d(0,0,0)} to{opacity:0;transform:translate3d(0,-14px,0)} }
+@keyframes workNavEnter { from{opacity:0;transform:translate3d(0,-14px,0)} to{opacity:1;transform:translate3d(0,0,0)} }
+
+/* Header: clip-wipe exit/enter */
+@keyframes workHeadExit  { from{clip-path:inset(0 0 0 0 round 4px);opacity:1} to{clip-path:inset(0 50% 0 50% round 4px);opacity:0} }
+@keyframes workHeadEnter { from{clip-path:inset(0 50% 0 50% round 4px);opacity:0} to{clip-path:inset(0 0 0 0 round 4px);opacity:1} }
+
+/* Cards: clip-wipe — each squeezes to its own center */
+@keyframes workCardExit  { from{clip-path:inset(0 0 0 0 round 12px);opacity:1} to{clip-path:inset(0 50% 0 50% round 12px);opacity:0} }
+@keyframes workCardEnter { from{clip-path:inset(0 50% 0 50% round 12px);opacity:0} to{clip-path:inset(0 0 0 0 round 12px);opacity:1} }
+
+/* ── ENTERING ── */
+.work--entering .work-navbar {
+  will-change: opacity, transform;
+  animation: workNavEnter 0.38s ease 0.08s both;
+}
+.work--entering .work-header {
+  will-change: clip-path, opacity;
+  animation: workHeadEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+.work--entering .work-card {
+  will-change: clip-path, opacity;
+  animation: workCardEnter 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.20s + var(--i) * 0.08s);
+}
+
+/* ── EXITING ── */
+.work--exiting .work-navbar {
+  will-change: opacity, transform;
+  animation: workNavExit 0.30s ease forwards;
+}
+.work--exiting .work-header {
+  will-change: clip-path, opacity;
+  animation: workHeadExit 0.40s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+.work--exiting .work-card {
+  will-change: clip-path, opacity;
+  animation: workCardExit 0.38s cubic-bezier(0.64, 0, 0.78, 0) both;
+  animation-delay: calc(var(--i) * 0.06s);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE DESIGN FOR WORK
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .work-content {
+    padding: 30px 18px 60px;
+  }
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

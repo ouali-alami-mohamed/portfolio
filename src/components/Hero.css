@@ -1,0 +1,540 @@
+/* ═══════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════ */
+
+.hero {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── Navbar ─── */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 48px;
+  z-index: 10;
+}
+
+.nav-logo {
+  position: absolute;
+  left: 48px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1816;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #2e2b28;
+  letter-spacing: 0.03em;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+  opacity: 0.45;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border: 1.5px solid #2e2b28;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1816;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.25s, color 0.25s;
+}
+
+.nav-cta:hover {
+  background: #1a1816;
+  color: #f9f7f5;
+}
+
+/* ─── Big name — two rows, split LEFT / RIGHT of photo ─── */
+.hero-name-bg {
+  position: absolute;
+  /* Push higher so it doesn't collide with the left content block */
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-68%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* Behind photo but above background */
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Each row spans full width, name on each side of photo gap */
+.name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3vw;
+  line-height: 1;
+}
+
+.name-row-bottom {
+  margin-top: -0.06em;
+}
+
+.name-left,
+.name-right {
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 900;
+  color: #1a1816;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 1;
+}
+
+/* ── Center photo — bg dissolves into page via layered gradient mask ── */
+.hero-photo-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(220px, 26vw, 380px);
+  height: 72vh;
+  z-index: 3;
+  pointer-events: none;
+  /* Light grey panel behind the person — edges dissolve via the masks below */
+  background: #808080;
+  overflow: visible;
+  /*
+   * Layered mask:
+   *   - Left/right edges fade horizontally
+   *   - Top fades upward
+   *   - Bottom is fully opaque (photo sits on the page edge)
+   * Combined with CSS mask-composite to get a soft dissolve on all sides.
+   */
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 22%, black 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 22%, black 100%);
+  mask-composite: intersect;
+}
+
+.hero-photo {
+  width: 100%;
+  height: 130%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  mix-blend-mode: normal;
+  /* Slightly softer contrast so grey bg blends naturally with warm page */
+  filter: contrast(1.05) brightness(0.97) saturate(0.3);
+}
+
+/* ─── Left content — sits cleanly below the name text ─── */
+.hero-left {
+  position: absolute;
+  left: clamp(24px, 4vw, 64px);
+  /* Push to the very bottom so it's clear of the name rows */
+  bottom: clamp(36px, 7vh, 90px);
+  z-index: 5;
+  max-width: 300px;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #777;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  color: #1a1816;
+  line-height: 1.15;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.hero-desc {
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.75;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: #1a1816;
+  color: #f9f7f5;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+.hero-btn:hover {
+  background: #3a3530;
+  transform: translateY(-2px);
+}
+
+.btn-arrow {
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.hero-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ─── Right side (Button + Socials) ─── */
+.hero-right {
+  position: absolute;
+  right: clamp(48px, 8vw, 120px);
+  bottom: clamp(64px, 12vh, 140px);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #2e2b28;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-link:hover {
+  opacity: 0.5;
+  transform: translateX(-4px);
+}
+
+.social-dash {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* ═══════════════════════════════════════
+   PAGE TRANSITION ANIMATIONS
+   Pixel-dissolve: slide + blur + opacity
+═══════════════════════════════════════ */
+
+/* Hero hidden but always mounted — no unmount/remount cost */
+.hero--gone {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Hero entering: raise above Experience so it appears on top during crossfade */
+.hero--entering {
+  z-index: 3;
+}
+
+/* Pre-promote animating elements to GPU layers */
+.hero--exiting .name-left,
+.hero--exiting .name-right,
+.hero--exiting .hero-left,
+.hero--exiting .hero-right,
+.hero--entering .name-left,
+.hero--entering .name-right,
+.hero--entering .hero-left,
+.hero--entering .hero-right {
+  will-change: transform, filter, opacity;
+}
+.hero--exiting .hero-photo-wrap,
+.hero--entering .hero-photo-wrap {
+  will-change: transform, filter, opacity;
+}
+
+/* ── EXIT KEYFRAMES: MODE 1 (Pixel Horizontal Dissolve) ── */
+@keyframes dissolveLeft {
+  0%   { transform: translate3d(0, 0, 0);      filter: blur(0px);   opacity: 1; }
+  50%  { filter: blur(5px); }
+  100% { transform: translate3d(-180px, 0, 0); filter: blur(12px);  opacity: 0; }
+}
+
+@keyframes dissolveRight {
+  0%   { transform: translate3d(0, 0, 0);     filter: blur(0px);   opacity: 1; }
+  50%  { filter: blur(5px); }
+  100% { transform: translate3d(180px, 0, 0); filter: blur(12px);  opacity: 0; }
+}
+
+@keyframes photoDissolveDown {
+  0%   { transform: translate3d(-50%, 0, 0);      filter: blur(0px);  opacity: 1; }
+  50%  { filter: blur(5px); }
+  100% { transform: translate3d(-50%, 160px, 0);  filter: blur(12px); opacity: 0; }
+}
+
+/* ── ENTER KEYFRAMES: MODE 1 (Pixel Horizontal Dissolve) ── */
+@keyframes appearFromLeft {
+  0%   { transform: translate3d(-180px, 0, 0); filter: blur(12px); opacity: 0; }
+  50%  { filter: blur(4px); }
+  100% { transform: translate3d(0, 0, 0);      filter: blur(0px);  opacity: 1; }
+}
+
+@keyframes appearFromRight {
+  0%   { transform: translate3d(180px, 0, 0);  filter: blur(12px); opacity: 0; }
+  50%  { filter: blur(4px); }
+  100% { transform: translate3d(0, 0, 0);      filter: blur(0px);  opacity: 1; }
+}
+
+@keyframes photoAppearFromBelow {
+  0%   { transform: translate3d(-50%, 160px, 0);  filter: blur(12px); opacity: 0; }
+  50%  { filter: blur(4px); }
+  100% { transform: translate3d(-50%, 0, 0);      filter: blur(0px);  opacity: 1; }
+}
+
+/* ── EXIT KEYFRAMES: MODE 2 (3D Vertical Split & Flip) ── */
+/* Right text goes UP */
+@keyframes dissolveVerticalRightExit {
+  0%   { transform: translate3d(0, 0, 0) rotateX(0deg);       filter: blur(0px);  opacity: 1; }
+  100% { transform: translate3d(0, -180px, 0) rotateX(-35deg); filter: blur(14px); opacity: 0; }
+}
+
+/* Left text goes DOWN */
+@keyframes dissolveVerticalLeftExit {
+  0%   { transform: translate3d(0, 0, 0) rotateX(0deg);      filter: blur(0px);  opacity: 1; }
+  100% { transform: translate3d(0, 180px, 0) rotateX(35deg);  filter: blur(14px); opacity: 0; }
+}
+
+/* Photo scales down & 3D rotates into center */
+@keyframes photoVerticalExit {
+  0%   { transform: translate3d(-50%, 0, 0) scale(1) rotateY(0deg);   filter: blur(0px);  opacity: 1; }
+  100% { transform: translate3d(-50%, 0, 0) scale(0.4) rotateY(90deg); filter: blur(12px); opacity: 0; }
+}
+
+/* ── ENTER KEYFRAMES: MODE 2 (3D Vertical Split & Flip) ── */
+/* Right text returns down from UP */
+@keyframes appearVerticalRightEnter {
+  0%   { transform: translate3d(0, -180px, 0) rotateX(-35deg); filter: blur(14px); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0) rotateX(0deg);       filter: blur(0px);  opacity: 1; }
+}
+
+/* Left text returns up from DOWN */
+@keyframes appearVerticalLeftEnter {
+  0%   { transform: translate3d(0, 180px, 0) rotateX(35deg);  filter: blur(14px); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0) rotateX(0deg);       filter: blur(0px);  opacity: 1; }
+}
+
+/* Photo expands back out from center */
+@keyframes photoVerticalEnter {
+  0%   { transform: translate3d(-50%, 0, 0) scale(0.4) rotateY(90deg); filter: blur(12px); opacity: 0; }
+  100% { transform: translate3d(-50%, 0, 0) scale(1) rotateY(0deg);   filter: blur(0px);  opacity: 1; }
+}
+
+/* Common navbar fade */
+@keyframes navFadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes navFadeIn  { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+
+/* ═══════════════════════════════════════
+   APPLY ANIMATIONS: MODE 1 (Pixel Dissolve)
+═══════════════════════════════════════ */
+.hero--exiting-pixel .name-left { animation: dissolveLeft 0.62s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+.hero--exiting-pixel .name-row-bottom .name-left { animation-delay: 0.06s; }
+.hero--exiting-pixel .name-right { animation: dissolveRight 0.62s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+.hero--exiting-pixel .name-row-bottom .name-right { animation-delay: 0.06s; }
+.hero--exiting-pixel .hero-left { animation: dissolveLeft 0.58s cubic-bezier(0.55, 0, 1, 0.45) 0.04s forwards; }
+.hero--exiting-pixel .hero-right { animation: dissolveRight 0.58s cubic-bezier(0.55, 0, 1, 0.45) 0.04s forwards; }
+.hero--exiting-pixel .hero-photo-wrap { animation: photoDissolveDown 0.60s cubic-bezier(0.55, 0, 1, 0.45) 0.08s forwards; }
+
+.hero--entering-pixel .name-left { animation: appearFromLeft 0.68s cubic-bezier(0, 0.55, 0.45, 1) both; }
+.hero--entering-pixel .name-row-bottom .name-left { animation-delay: 0.07s; }
+.hero--entering-pixel .name-right { animation: appearFromRight 0.68s cubic-bezier(0, 0.55, 0.45, 1) both; }
+.hero--entering-pixel .name-row-bottom .name-right { animation-delay: 0.07s; }
+.hero--entering-pixel .hero-left { animation: appearFromLeft 0.68s cubic-bezier(0, 0.55, 0.45, 1) 0.06s both; }
+.hero--entering-pixel .hero-right { animation: appearFromRight 0.68s cubic-bezier(0, 0.55, 0.45, 1) 0.06s both; }
+.hero--entering-pixel .hero-photo-wrap { animation: photoAppearFromBelow 0.72s cubic-bezier(0, 0.55, 0.45, 1) 0s both; }
+
+
+/* ═══════════════════════════════════════
+   APPLY ANIMATIONS: MODE 2 (Vertical Split 3D Flip)
+   Right text → goes UP
+   Left text  → goes DOWN
+═══════════════════════════════════════ */
+.hero--exiting-vertical .name-left { animation: dissolveVerticalLeftExit 0.62s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+.hero--exiting-vertical .name-row-bottom .name-left { animation-delay: 0.06s; }
+.hero--exiting-vertical .name-right { animation: dissolveVerticalRightExit 0.62s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+.hero--exiting-vertical .name-row-bottom .name-right { animation-delay: 0.06s; }
+.hero--exiting-vertical .hero-left { animation: dissolveVerticalLeftExit 0.58s cubic-bezier(0.55, 0, 1, 0.45) 0.04s forwards; }
+.hero--exiting-vertical .hero-right { animation: dissolveVerticalRightExit 0.58s cubic-bezier(0.55, 0, 1, 0.45) 0.04s forwards; }
+.hero--exiting-vertical .hero-photo-wrap { animation: photoVerticalExit 0.60s cubic-bezier(0.55, 0, 1, 0.45) 0.08s forwards; }
+
+.hero--entering-vertical .name-left { animation: appearVerticalLeftEnter 0.68s cubic-bezier(0, 0.55, 0.45, 1) both; }
+.hero--entering-vertical .name-row-bottom .name-left { animation-delay: 0.07s; }
+.hero--entering-vertical .name-right { animation: appearVerticalRightEnter 0.68s cubic-bezier(0, 0.55, 0.45, 1) both; }
+.hero--entering-vertical .name-row-bottom .name-right { animation-delay: 0.07s; }
+.hero--entering-vertical .hero-left { animation: appearVerticalLeftEnter 0.68s cubic-bezier(0, 0.55, 0.45, 1) 0.06s both; }
+.hero--entering-vertical .hero-right { animation: appearVerticalRightEnter 0.68s cubic-bezier(0, 0.55, 0.45, 1) 0.06s both; }
+.hero--entering-vertical .hero-photo-wrap { animation: photoVerticalEnter 0.72s cubic-bezier(0, 0.55, 0.45, 1) 0s both; }
+
+/* Navbar fade for all */
+.hero--exiting .navbar { animation: navFadeOut 0.5s cubic-bezier(0.55, 0, 1, 0.45) 0s forwards; }
+.hero--entering .navbar { animation: navFadeIn 0.55s ease both; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE DESIGN FOR HERO
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 18px 24px;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    position: static;
+    font-size: 0.95rem;
+  }
+  .nav-links {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .nav-links a {
+    font-size: 0.72rem;
+  }
+  .hero-photo-wrap {
+    width: clamp(200px, 38vw, 320px);
+    height: 64vh;
+  }
+  .name-left,
+  .name-right {
+    font-size: clamp(3.2rem, 7.5vw, 6rem);
+  }
+  .hero-left {
+    left: 24px;
+    bottom: 28px;
+    max-width: 260px;
+  }
+  .hero-title {
+    font-size: 1.6rem;
+  }
+  .hero-right {
+    right: 24px;
+    bottom: 28px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 14px 16px;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .nav-logo {
+    align-self: center;
+  }
+  .nav-links {
+    gap: 12px;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.68rem;
+    padding: 3px 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 999px;
+  }
+  .hero-name-bg {
+    transform: translateY(-64%);
+  }
+  .name-row {
+    padding: 0 12px;
+  }
+  .name-left,
+  .name-right {
+    font-size: clamp(2.2rem, 9.5vw, 3.6rem);
+    letter-spacing: -0.01em;
+  }
+  .hero-photo-wrap {
+    width: 210px;
+    height: 52vh;
+    bottom: 12vh;
+  }
+  .hero-left {
+    left: 16px;
+    right: 16px;
+    bottom: 18px;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-eyebrow {
+    margin-bottom: 4px;
+    font-size: 0.62rem;
+  }
+  .hero-title {
+    font-size: 1.35rem;
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+  .hero-title br {
+    display: none;
+  }
+  .hero-desc {
+    display: none; /* Keep clean on small mobile screens */
+  }
+  .hero-right {
+    position: absolute;
+    right: 16px;
+    bottom: 18px;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .hero-btn {
+    padding: 9px 18px;
+    font-size: 0.72rem;
+  }
+  .social-link {
+    font-size: 0.68rem;
+  }
+}

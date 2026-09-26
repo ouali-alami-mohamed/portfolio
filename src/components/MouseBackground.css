@@ -1,0 +1,141 @@
+/* ─── Background Wrapper ─── */
+.mouse-bg-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Warm off-white — much softer on the eyes than pure #fff */
+  background: #f9f7f5;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── Cursor Glow (soft black shadow under the ring) ─── */
+.cursor-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.05) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ─── Smooth Ring ─── */
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  margin-left: -19px;
+  margin-top: -19px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(26, 24, 22, 0.65);
+  pointer-events: none;
+  will-change: transform;
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              margin 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.3s ease,
+              background 0.3s ease;
+}
+
+/* Ring hover state — expands and fills slightly */
+.cursor-ring--hover {
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  border-color: rgba(26, 24, 22, 0.35);
+  background: rgba(26, 24, 22, 0.05);
+}
+
+/* ─── Instant Sharp Dot ─── */
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: #1a1816;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ─── Cursor top layer — always above every section (z-index 9999) ─── */
+.cursor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Ambient Floating Orbs ─── */
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatOrb linear infinite;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  top: -10%;
+  left: -5%;
+  background: radial-gradient(circle, rgba(200, 185, 160, 0.07) 0%, transparent 70%);
+  animation-duration: 18s;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  bottom: 5%;
+  right: 5%;
+  background: radial-gradient(circle, rgba(180, 165, 140, 0.07) 0%, transparent 70%);
+  animation-duration: 22s;
+  animation-delay: -7s;
+}
+
+.orb-3 {
+  width: 300px;
+  height: 300px;
+  top: 40%;
+  left: 55%;
+  background: radial-gradient(circle, rgba(160, 150, 130, 0.05) 0%, transparent 70%);
+  animation-duration: 26s;
+  animation-delay: -13s;
+}
+
+@keyframes floatOrb {
+  0%   { transform: translate(0px, 0px)    scale(1);    }
+  25%  { transform: translate(30px, -20px) scale(1.05); }
+  50%  { transform: translate(-15px, 30px) scale(0.97); }
+  75%  { transform: translate(-30px,-10px) scale(1.03); }
+  100% { transform: translate(0px, 0px)    scale(1);    }
+}
+
+/* ─── Subtle Dot Grid ─── */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}

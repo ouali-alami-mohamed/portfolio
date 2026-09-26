@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+* {
+  cursor: none !important;
+}
+
+html {
+  scrollbar-gutter: stable;
+  overflow-x: hidden;
+}
+
+body,
+#app {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Slim scrollbar prevents layout shift and bulky scrollbar jump */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 24, 22, 0.2);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 24, 22, 0.4);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26, 24, 22, 0.2) transparent;
+}
+
+/* ═══════════════════════════════════════
+   HEADER & FLOATING BACK BUTTONS
+═══════════════════════════════════════ */
+
+.section-nav-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-nav-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #888;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-header-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid #2e2b28;
+  border-radius: 999px;
+  padding: 5px 16px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #1a1816;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  font-family: inherit;
+}
+
+.section-header-back-btn:hover {
+  background: #1a1816;
+  color: #f9f7f5;
+  transform: translateY(-1px);
+}
+
+/* ─── Responsive: compact back button on small screens ─── */
+@media (max-width: 600px) {
+  .section-nav-title-group {
+    gap: 8px;
+  }
+  .section-nav-title {
+    font-size: 0.7rem;
+  }
+  .section-header-back-btn {
+    padding: 4px 12px;
+    font-size: 0.68rem;
+  }
+}
+
+/* ═══════════════════════════════════════
+   ALL PAGES FADED BLACK DOT WAVES BG
+═══════════════════════════════════════ */
+
+.hero::before,
+.skl-section::before,
+.srv-section::before,
+.exp-section::before,
+.edu-section::before,
+.prj-section::before,
+.ctc-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%231a1816'%3E%3Ccircle cx='15' cy='25' r='1.5' opacity='0.45'/%3E%3Ccircle cx='55' cy='45' r='2.2' opacity='0.65'/%3E%3Ccircle cx='95' cy='30' r='1.4' opacity='0.35'/%3E%3Ccircle cx='135' cy='55' r='2.5' opacity='0.55'/%3E%3Ccircle cx='35' cy='95' r='2' opacity='0.5'/%3E%3Ccircle cx='75' cy='115' r='1.3' opacity='0.3'/%3E%3Ccircle cx='115' cy='105' r='2.8' opacity='0.6'/%3E%3Ccircle cx='155' cy='135' r='1.6' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(rgba(26, 24, 22, 0.35) 1.2px, transparent 1.2px);
+  background-size: 160px 160px, 24px 24px;
+  mask-image: 
+    radial-gradient(ellipse 70% 55% at 15% 25%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 65%, transparent 100%),
+    radial-gradient(ellipse 60% 70% at 85% 75%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 65%, transparent 100%),
+    radial-gradient(ellipse 50% 45% at 50% 50%, rgba(0,0,0,0.85) 0%, transparent 100%);
+  -webkit-mask-image: 
+    radial-gradient(ellipse 70% 55% at 15% 25%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 65%, transparent 100%),
+    radial-gradient(ellipse 60% 70% at 85% 75%, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 65%, transparent 100%),
+    radial-gradient(ellipse 50% 45% at 50% 50%, rgba(0,0,0,0.85) 0%, transparent 100%);
+  animation: dotWaveDrift 25s ease-in-out infinite alternate;
+}
+
+.hero::after,
+.skl-section::after,
+.srv-section::after,
+.exp-section::after,
+.edu-section::after,
+.prj-section::after,
+.ctc-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+  background-image: radial-gradient(rgba(26, 24, 22, 0.45) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(0,0,0,1) 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(0,0,0,1) 0%, transparent 80%);
+  animation: dotWavePulse 12s ease-in-out infinite alternate;
+}
+
+@keyframes dotWaveDrift {
+  0% { background-position: 0px 0px, 0px 0px; }
+  50% { background-position: 30px 40px, 12px 12px; }
+  100% { background-position: -20px 70px, -12px -12px; }
+}
+
+@keyframes dotWavePulse {
+  0% { opacity: 0.25; transform: scale(1); }
+  100% { opacity: 0.4; transform: scale(1.05); }
+}
+
+/* Ensure content and nav sit on top of background dot waves */
+.skl-content, .srv-content, .exp-content, .edu-content, .prj-content, .ctc-content,
+.skl-navbar, .srv-navbar, .exp-navbar, .edu-navbar, .prj-navbar, .ctc-navbar {
+  position: relative;
+  z-index: 5;
+}

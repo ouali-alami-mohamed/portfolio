@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════
+   CONTACT SECTION
+═══════════════════════════════════════ */
+.ctc-section {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  background: #f9f7f5;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.ctc--gone {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Navbar ─── */
+.ctc-navbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 48px;
+  z-index: 10;
+}
+.ctc-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1.5px solid #2e2b28;
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1816;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, transform 0.2s;
+  font-family: inherit;
+}
+.ctc-back-btn:hover { background: #1a1816; color: #f9f7f5; transform: translateX(-3px); }
+.ctc-nav-center {
+  font-size: 0.78rem; font-weight: 600; color: #888;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.ctc-nav-hint { font-size: 0.72rem; color: #aaa; letter-spacing: 0.08em; }
+
+/* ─── Content ─── */
+.ctc-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: clamp(100px, 14vh, 160px) clamp(48px, 8vw, 120px) 60px;
+  align-items: center;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ─── Left ─── */
+.ctc-eyebrow {
+  font-size: 0.7rem; font-weight: 600; color: #888;
+  letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 14px;
+}
+.ctc-heading {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 900; color: #1a1816;
+  line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 20px;
+}
+.ctc-sub {
+  font-size: 0.82rem; color: #666; line-height: 1.8;
+  margin: 0 0 32px;
+}
+.ctc-links { display: flex; flex-direction: column; gap: 14px; }
+.ctc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #1a1816;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.ctc-link:hover { opacity: 0.5; }
+.ctc-link-icon {
+  width: 28px; height: 28px;
+  border: 1px solid #d8d5d0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+}
+
+/* ─── Form ─── */
+.ctc-form { display: flex; flex-direction: column; gap: 18px; }
+.ctc-field { display: flex; flex-direction: column; gap: 6px; }
+.ctc-label {
+  font-size: 0.7rem; font-weight: 600; color: #888;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.ctc-input,
+.ctc-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #e0ddd8;
+  border-radius: 10px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: #1a1816;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  resize: none;
+}
+.ctc-input:focus,
+.ctc-textarea:focus { border-color: #1a1816; }
+.ctc-input::placeholder,
+.ctc-textarea::placeholder { color: #bbb; }
+
+.ctc-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #1a1816;
+  color: #f9f7f5;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.2s;
+  align-self: flex-start;
+}
+.ctc-submit:hover { background: #3a3530; transform: translateY(-2px); }
+
+/* Success */
+.ctc-success {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 300px; gap: 16px;
+}
+.ctc-success-icon {
+  width: 56px; height: 56px;
+  border: 1.5px solid #1a1816;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: #1a1816;
+}
+.ctc-success-msg {
+  font-size: 0.9rem; color: #555; font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   STYLE ① (VAR B)  VERTICAL CLIP WIPE
+   Left & Right columns wipe vertically (top to bottom & center)
+═══════════════════════════════════════ */
+
+@keyframes ctcNavExit  { from{opacity:1;transform:translate3d(0,0,0)} to{opacity:0;transform:translate3d(0,-12px,0)} }
+@keyframes ctcNavEnter { from{opacity:0;transform:translate3d(0,-12px,0)} to{opacity:1;transform:translate3d(0,0,0)} }
+
+/* Left column clip wipe */
+@keyframes ctcLeftExit  { from{clip-path:inset(0 0 0 0);opacity:1} to{clip-path:inset(50% 0 50% 0);opacity:0} }
+@keyframes ctcLeftEnter { from{clip-path:inset(50% 0 50% 0);opacity:0} to{clip-path:inset(0 0 0 0);opacity:1} }
+
+/* Right column clip wipe */
+@keyframes ctcRightExit  { from{clip-path:inset(0 0 0 0);opacity:1} to{clip-path:inset(50% 0 50% 0);opacity:0} }
+@keyframes ctcRightEnter { from{clip-path:inset(50% 0 50% 0);opacity:0} to{clip-path:inset(0 0 0 0);opacity:1} }
+
+/* ── ENTERING ── */
+.ctc--entering .ctc-navbar {
+  will-change: opacity, transform;
+  animation: ctcNavEnter 0.4s ease 0.1s both;
+}
+.ctc--entering .ctc-left {
+  will-change: clip-path, opacity;
+  animation: ctcLeftEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+.ctc--entering .ctc-right {
+  will-change: clip-path, opacity;
+  animation: ctcRightEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+/* ── EXITING ── */
+.ctc--exiting .ctc-navbar {
+  will-change: opacity, transform;
+  animation: ctcNavExit 0.3s ease forwards;
+}
+.ctc--exiting .ctc-left {
+  will-change: clip-path, opacity;
+  animation: ctcLeftExit 0.38s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+.ctc--exiting .ctc-right {
+  will-change: clip-path, opacity;
+  animation: ctcRightExit 0.38s cubic-bezier(0.64, 0, 0.78, 0) 0.04s forwards;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE DESIGN FOR CONTACT
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .ctc-navbar {
+    padding: 16px 20px;
+  }
+  .ctc-content {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 80px 20px 48px;
+    align-items: start;
+  }
+  .ctc-heading {
+    font-size: 2.2rem;
+  }
+  .ctc-form {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ctc-heading {
+    font-size: 1.8rem;
+  }
+  .ctc-content {
+    padding: 72px 16px 40px;
+  }
+}
