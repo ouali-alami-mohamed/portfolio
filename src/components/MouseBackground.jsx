@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useMousePosition } from '../hooks/useMouseTracker';
 import './MouseBackground.css';
 
-const MouseBackground = () => {
+const MouseBackground = ({ isOnHero = true }) => {
   const { mousePosition, smoothPosition } = useMousePosition();
   const [isHovering, setIsHovering] = useState(false);
 
@@ -24,8 +24,8 @@ const MouseBackground = () => {
 
   return (
     <>
-      {/* ── Background layer (orbs, grid, glow) ── */}
-      <div className="mouse-bg-wrapper">
+      {/* ── Background layer (orbs, grid, glow) — only on Hero ── */}
+      <div className={`mouse-bg-wrapper ${isOnHero ? '' : 'mouse-bg-wrapper--hidden'}`}>
         <div
           className="cursor-glow"
           style={{
@@ -38,8 +38,8 @@ const MouseBackground = () => {
         <div className="grid-overlay" />
       </div>
 
-      {/* ── Cursor layer — always on top of every section ── */}
-      <div className="cursor-layer">
+      {/* ── Cursor layer — hidden when on section pages ── */}
+      <div className={`cursor-layer ${isOnHero ? '' : 'cursor-layer--hidden'}`}>
         <div
           className={`cursor-ring ${isHovering ? 'cursor-ring--hover' : ''}`}
           style={{

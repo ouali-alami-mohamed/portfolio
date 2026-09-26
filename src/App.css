@@ -8,9 +8,9 @@
   padding: 0;
 }
 
-html,
-body,
-* {
+/* Custom cursor active only on hero — sections use normal cursor */
+body.cursor-hidden,
+body.cursor-hidden * {
   cursor: none !important;
 }
 

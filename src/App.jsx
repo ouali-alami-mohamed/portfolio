@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import MouseBackground from './components/MouseBackground';
 import Hero       from './components/Hero';
 import Skills     from './components/Skills';
@@ -62,9 +62,21 @@ function App() {
   const animFor = (id) =>
     activeSection === id ? sectionAnimState : 'hidden';
 
+  // Cursor animation only makes sense on the Hero
+  const isOnHero = heroAnimState !== 'gone';
+
+  // Toggle body class so CSS cursor:none only applies on hero
+  useEffect(() => {
+    if (isOnHero) {
+      document.body.classList.add('cursor-hidden');
+    } else {
+      document.body.classList.remove('cursor-hidden');
+    }
+  }, [isOnHero]);
+
   return (
     <>
-      <MouseBackground />
+      <MouseBackground isOnHero={isOnHero} />
       <Hero
         animState={heroAnimState}
         onNavigate={goToSection}
