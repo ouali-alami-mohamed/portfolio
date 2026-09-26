@@ -23,7 +23,8 @@ export const useMousePosition = () => {
       p.currentX = lerp(p.currentX, p.targetX, 0.1);
       p.currentY = lerp(p.currentY, p.targetY, 0.1);
       setSmoothPosition({ x: p.currentX, y: p.currentY });
-oo   };
+      raf = requestAnimationFrame(animate);
+    };
 
     window.addEventListener('mousemove', handleMouseMove);
     raf = requestAnimationFrame(animate);
