@@ -1,6 +1,13 @@
 import './Education.css';
 
 const educations = [
+    {
+    id: 3,
+    role: 'Licence – Génie Informatique',
+    school: 'HighTech',
+    tags: ['Génie Informatique', 'Licence', 'En cours'],
+    desc: 'Formation en cours en génie informatique, pour approfondir les bases du développement logiciel et de l’ingénierie.',
+  },
   {
     id: 1,
     role: 'Diplôme en Développement Digital – Full Stack',
