@@ -1,8 +1,11 @@
+
 import { useState } from 'react';
 import './Contact.css';
 
 const Contact = ({ animState, onBackClick }) => {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
 
   const cls = animState === 'entering' ? 'ctc--entering'
@@ -10,9 +13,30 @@ const Contact = ({ animState, onBackClick }) => {
             : animState === 'hidden'   ? 'ctc--gone'
             : '';
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'ebe41329-dcf8-4461-aea5-035242d04780',
+          subject: `New portfolio message from ${form.name}`,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) setSent(true);
+      else setError('Something went wrong. Please try again.');
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,8 +119,9 @@ const Contact = ({ animState, onBackClick }) => {
                   required
                 />
               </div>
-              <button type="submit" className="ctc-submit">
-                Send message <span>→</span>
+              {error && <p style={{ color: '#ff6b6b' }}>{error}</p>}
+              <button type="submit" className="ctc-submit" disabled={loading}>
+                {loading ? 'Sending...' : <>Send message <span>→</span></>}
               </button>
             </form>
           )}
